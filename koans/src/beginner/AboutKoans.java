@@ -8,13 +8,13 @@ public class AboutKoans {
 
 	@Koan
 	public void findAboutKoansFile(){
-	        fail("delete this line");
+	        //fail("delete this line");
 	}
 	
 	@Koan
 	public void definitionOfKoanCompletion(){
 		boolean koanIsComplete = false;
-		if(!koanIsComplete){
+		if(koanIsComplete){
 			fail("what if koanIsComplete was true?");
 		}
 	}

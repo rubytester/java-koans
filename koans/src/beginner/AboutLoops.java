@@ -14,7 +14,7 @@ public class AboutLoops {
 		for(int i = 0; i < 5; i++) {
 			s += i + " ";
 		}
-		assertEquals(s, __);
+		assertEquals(s, "0 1 2 3 4 ");
 	}
 	
 	@Koan
@@ -23,17 +23,17 @@ public class AboutLoops {
 		for(int i = 0, j = 10; i < 5 && j > 5; i++, j--) {
 			s += i + " " + j + " ";
 		}
-		assertEquals(s, __);
+		assertEquals(s, "0 10 1 9 2 8 3 7 4 6 ");
 	}
 	
 	@Koan
 	public void extendedForLoop() {
-		int[] is = {1,2,3,4};
-		String s = "-";
-		for(int j : is) {
+		int[] is = {1,2,3,4};    // array of integers
+		String s = "-";   //seed for s
+		for(int j : is) {   // so that's like each in ruby?
 			s += "." + j;
 		}
-		assertEquals(s, __);
+		assertEquals(s, "-.1.2.3.4");
 	}
 	
 	@Koan
@@ -42,7 +42,7 @@ public class AboutLoops {
 		while(result < 3) {
 			result++;
 		}
-		assertEquals(result, __);
+		assertEquals(result, 3);
 	}
 	
 	@Koan
@@ -50,21 +50,21 @@ public class AboutLoops {
 		int result = 0;
 		do {
 			result++;
-		} while(false);
-		assertEquals(result, __);
+		} while(false);       // this exists on first try. body executes once
+		assertEquals(result, 1);
 	}
 	
 	@Koan
 	public void extendedForLoopBreak() {
 		String[] sa = {"Dog", "Cat", "Tiger" };
 		int count = 0;
-		for(String current : sa) {
+		for(String current : sa) {    // each element from sa out to current var (like sa.each do |current| in ruby)
 			if("Cat".equals(current)) {
 				break;
 			}
-			count++;	
+			count++;	      // we get Cat on second iteration
 		}
-		assertEquals(count, __);
+		assertEquals(count, 1);
 	}
 	
 	@Koan
@@ -73,12 +73,12 @@ public class AboutLoops {
 		int count = 0;
 		for(String current : sa) {
 			if("Dog".equals(current)) {
-				continue;
+				continue;             // on first iteration
 			} else {
-				count++;	
+				count++;	          //second and third element
 			}
 		}
-		assertEquals(count, __);
+		assertEquals(count, 2);
 	}
 
 	
@@ -94,11 +94,11 @@ public class AboutLoops {
 					continue outerLabel;	
 				}
 			}
-			count += 10;
+			count += 10000; // this is never reached then. labels are evil
 		}
-		// What does continue with a label mean? 
+		// What does continue with a label mean?
 		// What gets executed? Where does the program flow continue?
-		assertEquals(count, __);
+		assertEquals(count, 7);
 	}
 	
 	@Koan
@@ -113,11 +113,11 @@ public class AboutLoops {
 					break outerLabel;	
 				}
 			}
-			count += 10;
+			count += 100000;
 		}
 		// What does break with a label mean? 
 		// What gets executed? Where does the program flow continue?
-		assertEquals(count, __);
+		assertEquals(count, 3);
 	}
 
 }

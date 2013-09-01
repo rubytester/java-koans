@@ -182,42 +182,46 @@ public class AboutPrimitives {
 
 	@Koan
 	public void doublesHaveALargeRange() {
-		assertEquals(Double.MIN_VALUE, __);
-		assertEquals(Double.MAX_VALUE, __);
+        //well a double is double precision 64 bit from 4.9e-324 to 1.79e308
+        assertEquals(Double.MIN_VALUE, 4.9e-324);
+        Double d = new Double(Double.MAX_VALUE); // so I am not sure how to write max literal so I made d object
+		assertEquals(Double.MAX_VALUE, d);
+        assertEquals(Double.MAX_VALUE, 1.7976931348623157e308); //1.79E308 not precise then
 	}
 
 	@Koan
 	public void doubleSize() {
-		assertEquals(Double.SIZE, __);
+		assertEquals(Double.SIZE, 64); // int as number of 64 bits
 	}
 
 	@Koan
 	public void decimalNumbersCanAlsoBeOfTypeFloat() {
-		assertEquals(getType(1f), __);
+		assertEquals(getType(1f), float.class);
 	}
 
 	@Koan
 	public void primitivesOfTypeFloatCanBeDeclaredWithExponents() {
-		assertEquals(getType(1e3f), __);
-		assertEquals(1.0e3f, __);
-		assertEquals(1E3f, __);
+		assertEquals(getType(1e3f), float.class);
+		assertEquals(1.0e3f, 1000F); // I have no idea what this is aobut
+		assertEquals(1E3f, 1000F); // just a diff representation of numbers?
 	}
 
 	@Koan
 	public void primitivesOfTypeFloatHaveAnObjectTypeFloat() {
 		Object number = 1f;
-		assertEquals(getType(number), __);
+		assertEquals(getType(number), number.getClass());
+        assertEquals(getType(number).getName(), "java.lang.Float"); // name of class
 	}
 
 	@Koan
 	public void floatsHaveASmallerRangeThanDoubles() {
-		assertEquals(Float.MIN_VALUE, __);
-		assertEquals(Float.MAX_VALUE, __);
+		assertEquals(Float.MIN_VALUE, 1.4e-45f); // 2^-149 or 1.4 x 10^-45
+		assertEquals(Float.MAX_VALUE, 3.4028235E38f); // 3.4e38 but more precisiona and float
 	}
 
 	@Koan
 	public void floatSize() {
-		assertEquals(Float.SIZE, __);
+		assertEquals(Float.SIZE, 32); //32 bit as int
 	}
 
 	private Class<?> getType(int value) {

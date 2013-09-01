@@ -3,6 +3,7 @@ package beginner;
 import com.sandwich.koan.Koan;
 
 import java.text.MessageFormat;
+import java.util.MissingFormatArgumentException;
 
 import static com.sandwich.koan.constant.KoanConstants.*;
 import static com.sandwich.util.Assert.*;
@@ -11,30 +12,32 @@ public class AboutStrings {
 
 	@Koan
 	public void implicitStrings() {
-		assertEquals("just a plain ole string".getClass(), __);
+		assertEquals("just a plain ole string".getClass(), String.class);
+        assertEquals("just a plain ole string".getClass().getName(), "java.lang.String");
 	}
 
 	@Koan
 	public void newString() {
 		// very rarely if ever should Strings be created via new String() in 
 		// practice - generally it is redundant, and done repetitively can be slow
-		String string = new String();
-		String empty = "";
-		assertEquals(string.equals(empty), __);
+		String someString = new String();
+		String anotherString = "";
+		assertEquals(someString.equals(anotherString), true);
 	}
 
 	@Koan
 	public void newStringIsRedundant() {
 		String stringInstance = "zero";
-		String stringReference = new String(stringInstance);
-		assertEquals(stringInstance.equals(stringReference), __);
+		String stringReference = new String(stringInstance); //what do you mean redundant? as in the same value?
+		assertEquals(stringInstance.equals(stringReference), true); //equals here compares values right?
+        assertEquals("bla".equals("bla"), true);  //literals equal
 	}
 
 	@Koan
 	public void newStringIsNotIdentical() {
 		String stringInstance = "zero";
 		String stringReference = new String(stringInstance);
-		assertEquals(stringInstance == stringReference, __);
+		assertEquals(stringInstance == stringReference, false); //aha double == not the same as equals method
 	}
 
 	@Koan
@@ -42,7 +45,7 @@ public class AboutStrings {
 		String one = "one";
 		String space = " ";
 		String two = "two";
-		assertEquals(one + space + two, __);
+		assertEquals(one + space + two, "one two");
 	}
 
 	@Koan
@@ -51,43 +54,43 @@ public class AboutStrings {
 		// mutable String like object. It used to be more efficient than using +
 		// to concatate numerous strings, however this is optimized in the compiler now.
 		// Usually + concatenation is more appropriate than StringBuilder.
-		assertEquals(new StringBuilder("one").append(" ").append("two").toString(), __);
+		assertEquals(new StringBuilder("one").append(" ").append("two").toString(), "one two");
 	}
 
 	@Koan
 	public void readableStringFormattingWithStringFormat() {
-		assertEquals(String.format("%s %s %s", "a", "b", "a"), __);
+		assertEquals(String.format("%s %s %s", "a", "b", "a"), "a b a");
 	}
 
 	@Koan
 	public void extraArgumentsToStringFormatGetIgnored() {
-		assertEquals(String.format("%s %s %s", "a", "b", "c", "d"), __);
+		assertEquals(String.format("%s %s %s", "a", "b", "c", "d"), "a b c"); //d is dropped
 	}
 
 	@Koan
 	public void insufficientArgumentsToStringFormatCausesAnError() {
 		try {
-			String.format("%s %s %s", "a", "b");
+			String.format("%s %s %s", "a", "b"); // expecting 3 args but only 2 provided
 			fail("No Exception was thrown!");
 		} catch (Exception e) {
-			assertEquals(e.getClass(), __);
-			assertEquals(e.getMessage(), __);
+			assertEquals(e.getClass(), MissingFormatArgumentException.class);
+			assertEquals(e.getMessage(), "Format specifier 's'");
 		}
 	}
 
 	@Koan
 	public void readableStringFormattingWithMessageFormat() {
-		assertEquals(MessageFormat.format("{0} {1} {0}", "a", "b"), __);
+		assertEquals(MessageFormat.format("{0} {1} {0}", "a", "b"), "a b a");
 	}
 
 	@Koan
 	public void extraArgumentsToMessageFormatGetIgnored() {
-		assertEquals(MessageFormat.format("{0} {1} {0}", "a", "b", "c"), __);
+		assertEquals(MessageFormat.format("{0} {1} {0}", "a", "b", "c"), "a b a"); //c is ignored
 	}
 
 	@Koan
 	public void insufficientArgumentsToMessageFormatDoesNotReplaceTheToken() {
-		assertEquals(MessageFormat.format("{0} {1} {0}", "a"), __);
+		assertEquals(MessageFormat.format("{0} {1} {0}", "a"), "a {1} a"); // {1} token never gets replaced
 	}
 
 }

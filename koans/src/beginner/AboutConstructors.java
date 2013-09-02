@@ -19,7 +19,8 @@ public class AboutConstructors {
 	
 	@Koan
 	public void simpleConstructorOrder(){
-		assertEquals(new B().someString, __);
+        // visit all the turtles
+		assertEquals(new B().someString, "axg"); // so it gets field from A, A() constructor and finally B()
 	}
 	
 	class Aa {
@@ -36,7 +37,8 @@ public class AboutConstructors {
 	
 	@Koan
 	public void complexConstructorOrder(){
-		assertEquals(new Bb().someString, __);
+		assertEquals(new Bb().someString, "aBoog");
+        // "a" field add Boo. visit with "g"
 	}
 	
 }

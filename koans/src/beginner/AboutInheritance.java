@@ -13,6 +13,7 @@ public class AboutInheritance {
 
 	class Parent {
 		public String doStuff() { return "parent"; }
+        public String feedMe() { return "parent feeds child"; } // calling child goes to parent
 	}
 	class Child extends Parent {
 		public String doStuff() { return "child"; }
@@ -21,9 +22,10 @@ public class AboutInheritance {
 	
 	@Koan
 	public void differenceBetweenOverloadingAndOverriding() {
-		assertEquals(new Parent().doStuff(),__);
-		assertEquals(new Child().doStuff(),__);
-		assertEquals(new Child().doStuff("oh no"),__);
+		assertEquals(new Parent().doStuff(),"parent");
+		assertEquals(new Child().doStuff(),"child");
+		assertEquals(new Child().doStuff("oh no"),"oh no");  // good example of overloading
+        assertEquals(new Child().feedMe(), "parent feeds child");
 	}
 	
 	abstract class ParentTwo {
@@ -31,14 +33,19 @@ public class AboutInheritance {
 	}
 	
 	class ChildTwo extends ParentTwo {
-		public Collection<?> doStuff() { return Collections.emptyList(); };
+		public Collection<?> doStuff() { return Collections.emptyList(); } // extra ; was not needed
 	}
 	
 	@Koan
 	public void overriddenMethodsMayReturnSubtype() {
 		// What do you need to change in order to get rid of the type cast?
 		// Why does this work?
-		List<?> list = (List<?>)new ChildTwo().doStuff();
-		assertEquals(list instanceof List, __);
+		List<?> list = (List<?>)new ChildTwo().doStuff(); //some voodoo I don't yet understand
+		assertEquals(list instanceof List, true);
+        assertEquals(list.isEmpty(), true); // yep, an empty list of unknown things?
+
+        // no type cast?
+        Collection<?>  c = new ChildTwo().doStuff(); // holly mother of ...
+        assertEquals(c instanceof Collection, true);
 	}
 }

@@ -11,10 +11,11 @@ public class AboutConditionals {
 	@Koan
 	public void basicIfWithoutCurly(){
 		// Ifs without curly braces are ugly and not recommended but still valid:
+        //arghhh ! why is this example here. valid but do not do it
 		int x = 1;
 		if (true) 
 			x++;
-		assertEquals(x,__);
+		assertEquals(x,2);
 	}
 	
 	@Koan
@@ -26,7 +27,7 @@ public class AboutConditionals {
 			x++;
 		else
 			x--;
-		assertEquals(x,__);
+		assertEquals(x,0);
 	}
 	
 	@Koan
@@ -41,7 +42,7 @@ public class AboutConditionals {
 			x = 10;
 		else
 			x--;
-		assertEquals(x,__);
+		assertEquals(x,10);
 	}
 	
 	@Koan
@@ -55,7 +56,7 @@ public class AboutConditionals {
 			if (otherBooleanCondition) x = 10;
 		else x--;
 		// Where does this else belong to!?
-		assertEquals(x,__);
+		assertEquals(x,10);
 	}
 	
 	@Koan
@@ -69,7 +70,7 @@ public class AboutConditionals {
 		}
 		// There are different opinions on where the curly braces go...
 		// But as long as you put them here. You avoid problems as seen above.
-		assertEquals(x,__);
+		assertEquals(x,2);
 	} 
 	
 	@Koan 
@@ -86,7 +87,7 @@ public class AboutConditionals {
 			default:
 				result += "Nothing";
 		}
-		assertEquals(result, __);
+		assertEquals(result, "Basic One");
 	}
 	
 	@Koan 
@@ -101,7 +102,9 @@ public class AboutConditionals {
 			default:
 				result += "Nothing";
 		}
-		assertEquals(result, __);
+		assertEquals(result, "Basic OneTwoNothing");
+		// so you have to explicitly break; or other cases are also executed.
+        // this is a bit idiotic in java
 	}
 	
 	@Koan 
@@ -110,13 +113,13 @@ public class AboutConditionals {
 		String result = "Basic ";
 		switch(i) {
 			case 1:
-				result += "One";
+				result += "One";    //this will not execute
 			default:
-				result += "Nothing";
+				result += "Nothing"; // but this will
 			case 2:
-				result += "Two";
+				result += "Two";   // and this will two
 		}
-		assertEquals(result, __);
+		assertEquals(result, "Basic NothingTwo");
 	}
 	
 	@Koan 
@@ -133,7 +136,7 @@ public class AboutConditionals {
 			default:
 				result += "Nothing";
 		}
-		assertEquals(result, __);
+		assertEquals(result, "Basic Nothing");
 	}
 	
 	@Koan 
@@ -141,7 +144,7 @@ public class AboutConditionals {
 		// Try different (primitive) types for 'c'
 		// Which types do compile?
 		// Does boxing work?
-		byte c = 'a';
+		byte c = 'a';        // so we want byte but we give it a char
 		String result = "Basic ";
 		switch(c) {
 			case 'a':
@@ -150,6 +153,6 @@ public class AboutConditionals {
 			default:
 				result += "Nothing";
 		}
-		assertEquals(result, __);
+		assertEquals(result, "Basic One");
 	}
 }
